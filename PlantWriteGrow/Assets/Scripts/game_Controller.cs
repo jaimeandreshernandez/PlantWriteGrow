@@ -24,8 +24,17 @@ public class game_Controller : MonoBehaviour {
 	public Text txtCurrentWord;
 	private System.Random _rng = new System.Random();
     private int tmrCurrentWord = 0;
+	private int counter;
+	private int lengthMax;
+	private int lengthMin;
+
+	[SerializeField]
+	private Text displayDifficulty;
+
 
 	public void Start() {
+		counter = 0;
+		displayDifficulty.text = "Level 1";
 
 	}
 
@@ -33,7 +42,13 @@ public class game_Controller : MonoBehaviour {
 		int tick = Environment.TickCount;
 		if (tick > tmrCurrentWord) {
             GenerateNewCurrentWord();
-			tmrCurrentWord = tick + 5000;
+			if (counter <= 10) {
+				this.tmrCurrentWord = Environment.TickCount + 5000;
+			} else if (counter > 10 && counter <= 30) {
+				this.tmrCurrentWord = Environment.TickCount + 3500;
+			} else if (counter > 30) {
+				this.tmrCurrentWord = Environment.TickCount + 1500;
+			}
 		}
 	}
 
@@ -53,10 +68,25 @@ public class game_Controller : MonoBehaviour {
 
         // Is the current guess the correct answer?
         if (this._currentWord == text.ToLower()) {
+			counter++;
+			if (counter == 10) {
+				displayDifficulty.text = "Level 2";
+			}
+			if (counter == 30) {
+				displayDifficulty.text = "Level 3";
+			}
             this.ClearTextInput();
             GameObject.FindGameObjectWithTag("Lamp Manager").GetComponent<LampManager>().UpgradeLamps();
-            this.tmrCurrentWord = Environment.TickCount + 5000;
+			//resetting the timer to the previous time
+			if (counter <= 10) {
+				this.tmrCurrentWord = Environment.TickCount + 5000;
+			} else if (counter > 10 && counter <= 30) {
+				this.tmrCurrentWord = Environment.TickCount + 3500;
+			} else if (counter > 30) {
+				this.tmrCurrentWord = Environment.TickCount + 1500;
+			}
             this.GenerateNewCurrentWord();
+
         }
     }
 
@@ -71,11 +101,7 @@ public class game_Controller : MonoBehaviour {
     }
 
     private string GetWord() {
-        // This beauty can be refactored into one line.
-        return this._words[this._rng.Next(0, this._words.Length)];
-	}
-
-	private IEnumerator wait(float f){
-		yield return new WaitForSeconds(f);
+        // This will generate a word
+			return this._words [this._rng.Next (0, this._words.Length)];
 	}
 }
