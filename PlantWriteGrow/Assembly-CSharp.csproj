@@ -45,6 +45,8 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+     <Compile Include="Assets\Scripts\LampManager.cs" />
+     <Compile Include="Assets\Scripts\PotatoManager.cs" />
      <Compile Include="Assets\Scripts\User Interface\MenuScript.cs" />
      <Compile Include="Assets\Scripts\game_Controller.cs" />
      <Compile Include="Assets\Scripts\textgenerator.cs" />
