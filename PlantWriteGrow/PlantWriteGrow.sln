@@ -1,6 +1,8 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 2015
+# Visual Studio 14
+VisualStudioVersion = 14.0.25123.0
+MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PlantWriteGrow.CSharp", "PlantWriteGrow.CSharp.csproj", "{9F7729D3-DE8A-F885-A761-0DF0E942F48B}"
 EndProject
 Global
