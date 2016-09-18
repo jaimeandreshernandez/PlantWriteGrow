@@ -42,19 +42,25 @@ public class game_Controller : MonoBehaviour {
 		int tick = Environment.TickCount;
 		if (tick > tmrCurrentWord) {
             GenerateNewCurrentWord();
-			if (counter <= 10) {
-				this.tmrCurrentWord = Environment.TickCount + 5000;
-			} else if (counter > 10 && counter <= 30) {
-				this.tmrCurrentWord = Environment.TickCount + 3500;
-			} else if (counter > 30) {
-				this.tmrCurrentWord = Environment.TickCount + 1500;
+            //level 1 and 4 and level 7
+			if (counter <= 10 || (counter > 60 && counter <= 90) || (counter > 150 && counter <= 180))
+            {
+				this.tmrCurrentWord = Environment.TickCount + 10000;
+			}
+            //level 2 and 5 and 8
+            else if ((counter > 10 && counter <= 30) || (counter > 90 && counter <= 120) || (counter > 180 && counter <= 210)) {
+				this.tmrCurrentWord = Environment.TickCount + 7000;
+			}
+            //level 3 and 6 and 9
+            else
+            {
+				this.tmrCurrentWord = Environment.TickCount + 4000;
 			}
 		}
 	}
 
     private void GenerateNewCurrentWord() {
         this._currentWord = GetWord().ToLower();
-        Debug.Assert(string.IsNullOrEmpty(this._currentWord.Trim()), this._currentWord);
         this.txtCurrentWord.text = "Enter the word: " + this._currentWord;
     }
 
@@ -65,26 +71,62 @@ public class game_Controller : MonoBehaviour {
 
         // Focus on the textbox
         this.FocusTextInput();
+        this.ClearTextInput();
+
 
         // Is the current guess the correct answer?
-        if (this._currentWord == text.ToLower()) {
+        if (this._currentWord == text.ToLower())
+        {
 			counter++;
-			if (counter == 10) {
+            
+            if (counter == 10) {
 				displayDifficulty.text = "Level 2";
 			}
 			if (counter == 30) {
 				displayDifficulty.text = "Level 3";
 			}
-            this.ClearTextInput();
+            if (counter == 60)
+            {
+                displayDifficulty.text = "Level 4";
+            }
+            if (counter == 90)
+            {
+                displayDifficulty.text = "Level 5";
+            }
+            if (counter == 120)
+            {
+                displayDifficulty.text = "Level 6";
+            }
+            if (counter == 150)
+            {
+                displayDifficulty.text = "Level 7";
+            }
+            if (counter == 180)
+            {
+                displayDifficulty.text = "Level 8";
+            }
+            if (counter == 210)
+            {
+                displayDifficulty.text = "Level 9";
+            }
+            //this.ClearTextInput();
             GameObject.FindGameObjectWithTag("Lamp Manager").GetComponent<LampManager>().UpgradeLamps();
-			//resetting the timer to the previous time
-			if (counter <= 10) {
-				this.tmrCurrentWord = Environment.TickCount + 5000;
-			} else if (counter > 10 && counter <= 30) {
-				this.tmrCurrentWord = Environment.TickCount + 3500;
-			} else if (counter > 30) {
-				this.tmrCurrentWord = Environment.TickCount + 1500;
-			}
+            //resetting the timer to the previous time
+            //level 1 and 4 and level 7
+            if (counter <= 10 || (counter > 60 && counter <= 90) || (counter > 150 && counter <= 180))
+            {
+                this.tmrCurrentWord = Environment.TickCount + 10000;
+            }
+            //level 2 and 5 and 8
+            else if ((counter > 10 && counter <= 30) || (counter > 90 && counter <= 120) || (counter > 180 && counter <= 210))
+            {
+                this.tmrCurrentWord = Environment.TickCount + 7000;
+            }
+            //level 3 and 6 and 9
+            else
+            {
+                this.tmrCurrentWord = Environment.TickCount + 4000;
+            }
             this.GenerateNewCurrentWord();
 
         }
@@ -102,6 +144,38 @@ public class game_Controller : MonoBehaviour {
 
     private string GetWord() {
         // This will generate a word
-			return this._words [this._rng.Next (0, this._words.Length)];
-	}
+
+        //return word based on level.
+        string tempWord = "";
+
+        //for level 1 string less than 5
+        if(displayDifficulty.text == "Level 1" || displayDifficulty.text == "Level 4" || displayDifficulty.text == "Level 7")
+        {
+            do
+            {
+                tempWord = this._words[this._rng.Next(0, this._words.Length)];
+            } while (tempWord.Length>4);
+        }
+
+        // for level 2 between 5 and 7
+        else if (displayDifficulty.text == "Level 2" || displayDifficulty.text == "Level 5" || displayDifficulty.text == "Level 8")
+        {
+            do
+            {
+                tempWord = this._words[this._rng.Next(0, this._words.Length)];
+            } while (tempWord.Length > 7 || tempWord.Length < 5);
+        }
+
+        //for level 3 more than string length 8
+        if (displayDifficulty.text == "Level 3" || displayDifficulty.text == "Level 6" || displayDifficulty.text == "Level 9")
+        {
+            do
+            {
+                tempWord = this._words[this._rng.Next(0, this._words.Length)];
+            } while (tempWord.Length < 8);
+        }
+
+        return tempWord;
+        //return this._words [this._rng.Next (0, this._words.Length)];
+    }
 }
