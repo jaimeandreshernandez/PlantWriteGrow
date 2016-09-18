@@ -5,10 +5,11 @@ using System;
 
 public class game_Controller : MonoBehaviour {
 
-    private string[] _words = new string[]{"allo","whatever","young","money","perspective","computer","java","python","random",
+    private string[] _words = new string[] {
+        "allo","whatever","young","money","perspective","computer","java","python","random",
 		"friend","stranger","why","common","laptop","success","professional","coffee","same","engine","camera","annoying","serialize","banana",
 		"system","verb","risk","collection","god","greek","america","when","who","typing","pooping","toilet","television","keyboard",
-		"graphic","music","piano","bottle","chair","control","project","tools","build","search","window","development","concret"
+		"graphic","music","piano","bottle","chair","control","project","tools","build","search","window","development","concrete"
     };
 	private string _currentWord;
 	public Text txtCurrentWord;
@@ -29,6 +30,7 @@ public class game_Controller : MonoBehaviour {
 
     private void GenerateNewCurrentWord() {
         this._currentWord = GetWord().ToLower();
+        Debug.Assert(string.IsNullOrEmpty(this._currentWord.Trim()), this._currentWord);
         this.txtCurrentWord.text = "Enter the word: " + this._currentWord;
     }
 
@@ -60,14 +62,8 @@ public class game_Controller : MonoBehaviour {
     }
 
     private string GetWord() {
-        //string result;
-        //int num = _rng.Next (this._words.Length);
-        //result = _words [num];
-        //wait (100f);
-        //return result;
-
         // This beauty can be refactored into one line.
-        return this._words[this._rng.Next(this._words.Length)];
+        return this._words[this._rng.Next(0, this._words.Length)];
 	}
 
 	private IEnumerator wait(float f){
