@@ -4,7 +4,7 @@ using System.Collections;
 using UnityEngine.UI;
 
 
-public class textgenerator : MonoBehaviour {
+public class textgenerator : MonoBehaviour  {
 
     System.Random rand = new System.Random();
     public Text textManager;
@@ -20,6 +20,7 @@ public class textgenerator : MonoBehaviour {
     public float y = 0f;
     public float z = 0f;
     int tmr1000 = 0;
+	string currentWord = "";
 
 
 
@@ -45,7 +46,7 @@ public class textgenerator : MonoBehaviour {
                 // Do your logic here.
                 textManager.rectTransform.position.Set(x, 0, 0);
                 textManager.text = getWord();
-                tmr1000 = tick + 1000;
+                tmr1000 = tick + 5000;
             }
 
         
@@ -64,8 +65,14 @@ public class textgenerator : MonoBehaviour {
         //textManager.text = word;
 
         wait(100f);
+		currentWord = word;
         return word;
     }
+
+	public string getCurrentWord()
+	{
+		return currentWord;
+	}
 
     public IEnumerator wait(float f)
     {
