@@ -11,7 +11,7 @@ public class LampManager : MonoBehaviour {
 
     // The next interval for degrading the lamps.
     private int _tmrLampDecrementation;
-    public const int LAMP_DEGRADE_RATE = 100;
+    public const int LAMP_DEGRADE_RATE = 500;
     private const int MAX_LAMP_INTENSITY = 8;
 
 	// Use this for initialization
@@ -29,8 +29,8 @@ public class LampManager : MonoBehaviour {
             }
         }
 
-        // Initialize the first value of the light strenght: 100%
-        LampManager.LightStrength = 1.0f;
+        // Initialize the first value of the light strenght: 35%
+        LampManager.LightStrength = 0.35f;
 	}
 	
 	// Update is called once per frame
@@ -49,7 +49,7 @@ public class LampManager : MonoBehaviour {
         }
 
         // Increment the light strengh, and update the lamps.
-        LampManager.LightStrength += 0.005f;
+        LampManager.LightStrength += 0.05f;
         this.UpdateLampStrength();
     }
 
