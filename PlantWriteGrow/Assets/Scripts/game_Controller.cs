@@ -42,6 +42,7 @@ public class game_Controller : MonoBehaviour {
 		int tick = Environment.TickCount;
 		if (tick > tmrCurrentWord) {
             GenerateNewCurrentWord();
+
             //level 1 and 4 and level 7
 			if (counter <= 10 || (counter > 60 && counter <= 90) || (counter > 150 && counter <= 180))
             {
@@ -56,6 +57,15 @@ public class game_Controller : MonoBehaviour {
             {
 				this.tmrCurrentWord = Environment.TickCount + 4000;
 			}
+
+			//if (counter <= 10) {
+				this.tmrCurrentWord = Environment.TickCount + 5000;
+			//} else if (counter > 10 && counter <= 30) {
+			//	this.tmrCurrentWord = Environment.TickCount + 3500;
+			//} else if (counter > 30) {
+			//	this.tmrCurrentWord = Environment.TickCount + 1500;
+			//}
+
 		}
 	}
 
@@ -111,6 +121,7 @@ public class game_Controller : MonoBehaviour {
             }
             //this.ClearTextInput();
             GameObject.FindGameObjectWithTag("Lamp Manager").GetComponent<LampManager>().UpgradeLamps();
+
             //resetting the timer to the previous time
             //level 1 and 4 and level 7
             if (counter <= 10 || (counter > 60 && counter <= 90) || (counter > 150 && counter <= 180))
@@ -127,6 +138,16 @@ public class game_Controller : MonoBehaviour {
             {
                 this.tmrCurrentWord = Environment.TickCount + 4000;
             }
+
+			//resetting the timer to the previous time
+			//if (counter <= 10) {
+				this.tmrCurrentWord = Environment.TickCount + 5000;
+			//} else if (counter > 10 && counter <= 30) {
+			//	this.tmrCurrentWord = Environment.TickCount + 3500;
+			//} //else if (counter > 30) {
+			//	this.tmrCurrentWord = Environment.TickCount + 1500;
+			//}
+
             this.GenerateNewCurrentWord();
 
         }
