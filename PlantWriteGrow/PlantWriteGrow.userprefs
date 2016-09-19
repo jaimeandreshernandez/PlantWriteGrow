@@ -1,9 +1,10 @@
 ﻿<Properties StartupItem="Assembly-CSharp.csproj">
   <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" PreferredExecutionTarget="Unity.Instance.Unity Editor" />
-  <MonoDevelop.Ide.Workbench ActiveDocument="Assets/Scripts/PotatoManager.cs">
+  <MonoDevelop.Ide.Workbench ActiveDocument="Assets/Scripts/LampManager.cs">
     <Files>
-      <File FileName="Assets/Scripts/game_Controller.cs" Line="4" Column="14" />
-      <File FileName="Assets/Scripts/PotatoManager.cs" Line="49" Column="59" />
+      <File FileName="Assets/Scripts/game_Controller.cs" Line="90" Column="1" />
+      <File FileName="Assets/Scripts/PotatoManager.cs" Line="45" Column="25" />
+      <File FileName="Assets/Scripts/LampManager.cs" Line="1" Column="1" />
     </Files>
   </MonoDevelop.Ide.Workbench>
   <MonoDevelop.Ide.DebuggingService.Breakpoints>
